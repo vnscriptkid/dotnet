@@ -35,3 +35,9 @@ dotnet new gitignore
 * C# Extensions (JosKreativ)
 * NuGet Gallery
 
+#### Debug
+* `Ctrl + Shift + D`
+* `.NET Core Attach`
+* `Start`
+* `API.exe`
+
