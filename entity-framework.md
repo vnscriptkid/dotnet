@@ -11,4 +11,5 @@ dotnet tool install --global dotnet-ef --version 5.0.8
 ## Migrations
 ```console
 dotnet ef migrations add InitialCreate -o Data/Migrations
+dotnet ef database update
 ```
