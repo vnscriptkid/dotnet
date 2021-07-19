@@ -24,6 +24,11 @@ dotnet watch run
 dotnet dev-certs https --trust
 ```
 
+* Create gitignore file
+```console
+dotnet new gitignore
+```
+
 ## VSCode
 #### Extensions
 * C# for Visual Studio Code (powered by OmniSharp).
