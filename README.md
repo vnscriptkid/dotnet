@@ -13,11 +13,15 @@ dotnet new webapi -o API
 ```console
 dotnet sln add API
 ```
-
 * Run api
 ```console
 cd API
 dotnet run
+dotnet watch run
+```
+* Trust https
+```console
+dotnet dev-certs https --trust
 ```
 
 ## VSCode
