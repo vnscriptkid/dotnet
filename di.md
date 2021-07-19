@@ -7,3 +7,6 @@
 
 ## How it effects objects created
 - DI approaches decide when object is created, how long is it's lifetime, when it is destroyed
+
+## Benefits of using interface
+- Easy for testing by mocking
