@@ -1,3 +1,5 @@
+# Up and running
+
 ## dotnet cli
 * Create new solution file
 ```console
@@ -11,3 +13,14 @@ dotnet new webapi -o API
 ```console
 dotnet sln add API
 ```
+
+* Run api
+```console
+cd API
+dotnet run
+```
+
+## VSCode
+#### Extensions
+* C# for Visual Studio Code (powered by OmniSharp).
+* C# Extensions (JosKreativ)
