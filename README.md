@@ -28,3 +28,5 @@ dotnet dev-certs https --trust
 #### Extensions
 * C# for Visual Studio Code (powered by OmniSharp).
 * C# Extensions (JosKreativ)
+* NuGet Gallery
+
