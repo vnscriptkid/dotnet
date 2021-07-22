@@ -42,3 +42,17 @@ public class Photo
 var blog = new Blog { Name = "ADO.NET Blog" };
 context.Blogs.Add(blog); // context.Entry(blog).State = EntityState.Added;
 context.SaveChanges();
+```
+
+## Eager Loading
+```csharp
+// Data/UserRepository.cs
+public async Task<IEnumerable<AppUser>> GetAllUsersAsync()
+{
+    return await _context.Users
+        .Include(u => u.Photos)
+        .ToListAsync();
+}
+```
+⚠️ `A possible object cycle was detected`
+✔️ DTO comes to rescue
