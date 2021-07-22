@@ -13,3 +13,22 @@ dotnet tool install --global dotnet-ef --version 5.0.8
 dotnet ef migrations add InitialCreate -o Data/Migrations
 dotnet ef database update
 ```
+
+* Delete latest migration
+```console
+dotnet ef migrations remove
+```
+
+## Fully defined relationships
+* Contraints on deletion: `CASCADE`
+* Not allow foreign key to be null
+
+```csharp
+[Table("Photos")]
+public class Photo
+{
+    // ...
+    public AppUser user { get; set; }
+    public int AppUserId { get; set; }
+}
+```
