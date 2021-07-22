@@ -69,3 +69,21 @@ public async Task<MemberDto> GetMemberByUsernameAsync(string Username)
         .SingleOrDefaultAsync();
 }
 ```
+#### ⚠️☠️ Gotchas !!! Having something like this in source class might prevent `projectTo` functioning correctly
+```csharp
+public int getAge()
+{
+    return DateOfBirth.CalculateAge();
+}
+```
+👉✔️ Move this logic into `AutoMapperProfiles`
+```csharp
+public AutoMapperProfiles()
+{
+    CreateMap<AppUser, MemberDto>()
+        .ForMember(
+            dest => dest.Age,
+            opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge())
+        );
+}        
+```
