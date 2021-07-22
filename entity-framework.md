@@ -32,3 +32,6 @@ public class Photo
     public int AppUserId { get; set; }
 }
 ```
+
+## Repository Pattern
+- Put a layer of abtraction over ORM lib (persistence layer)
