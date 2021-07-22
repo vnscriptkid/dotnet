@@ -54,5 +54,21 @@ public async Task<IEnumerable<AppUser>> GetAllUsersAsync()
         .ToListAsync();
 }
 ```
-⚠️ `A possible object cycle was detected`
-✔️ DTO comes to rescue
+* ⚠️ `A possible object cycle was detected`
+```csharp
+public class AppUser
+{
+    public int Id { get; set; }
+    public string Username { get; set; }
+    public ICollection<Photo> Photos { get; set; } // load associated photos
+}
+
+public class Photo
+{
+    public int Id { get; set; }
+    public string Url { get; set; }
+    public AppUser user { get; set; } // load associated user
+    public int AppUserId { get; set; }
+}
+```
+* ✔️ DTO comes to rescue
