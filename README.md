@@ -29,6 +29,10 @@ dotnet dev-certs https --trust
 dotnet new gitignore
 ```
 
+## Important files
+* Program.cs is where the application starts.
+* Startup.cs is where lot of the configuration happens.
+
 ## VSCode
 #### Extensions
 * C# for Visual Studio Code (powered by OmniSharp).
