@@ -41,3 +41,16 @@ var usersToReturn = _mapper.Map<IEnumerable<MemberDto>>(users);
 
 return Ok(usersToReturn);
 ```
+
+## Do some processing while automapping
+```csharp
+// Helpers/AutoMapperProfiles.cs
+public AutoMapperProfiles()
+{
+    CreateMap<AppUser, MemberDto>()
+        .ForMember(
+            dest => dest.PhotoUrl,
+            opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url)
+        );
+}               
+```
