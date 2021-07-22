@@ -35,3 +35,10 @@ public class Photo
 
 ## Repository Pattern
 - Put a layer of abtraction over ORM lib (persistence layer)
+
+## Context
+* Adding a new entity to the context
+```csharp
+var blog = new Blog { Name = "ADO.NET Blog" };
+context.Blogs.Add(blog); // context.Entry(blog).State = EntityState.Added;
+context.SaveChanges();
