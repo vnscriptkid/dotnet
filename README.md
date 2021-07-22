@@ -32,6 +32,8 @@ dotnet new gitignore
 ## Important files
 * Program.cs is where the application starts.
 * Startup.cs is where lot of the configuration happens.
+  * Register app's services (`ConfigureServices`)
+  * Create request processing pipeline (`Configure`)
 
 ## VSCode
 #### Extensions
