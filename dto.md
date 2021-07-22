@@ -6,6 +6,7 @@ https://martinfowler.com/bliki/LocalDTO.html
 - Prevent circular dependencies when eager-loading
 - Restrict what data to be sent
   - Don't expose user's password fields
+- Select desired fields while querying database
 
 ## What is automapping
 - Map an object to another object
@@ -53,4 +54,18 @@ public AutoMapperProfiles()
             opt => opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url)
         );
 }               
+```
+
+## Automapper Usecase 2
+* __Problem__: By default, Entity Framework select all fields while querying database (`SELECT * FROM`)
+* __Solution__: Chain on `.Select()` API offered by EF to selectively retrieve desired fields __manually__
+* __Alternative__: `ProjectTo` a __DTO__
+```csharp
+public async Task<MemberDto> GetMemberByUsernameAsync(string Username)
+{
+    return await _context.Users
+        .Where(u => u.Username == Username)
+        .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+        .SingleOrDefaultAsync();
+}
 ```
