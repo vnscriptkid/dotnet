@@ -87,3 +87,29 @@ public AutoMapperProfiles()
         );
 }        
 ```
+
+## DTO Usecase: Partial update endpoint
+#### Restrict certain fields to be updated
+```csharp
+public class MemberUpdateDto
+{
+    public string Introduction { get; set; }
+    public string LookingFor { get; set; }
+    public string Interests { get; set; }
+}
+```
+#### 🔌 Plug in controller param to filter user's input
+```csharp
+[HttpPut]
+public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+```
+
+#### Populate model object with updated data (⚠️Must register mapping config)
+```csharp
+_mapper.Map(memberUpdateDto, user);
+```
+
+#### Register mapping config for above code
+```csharp
+CreateMap<MemberUpdateDto, AppUser>();
+```
