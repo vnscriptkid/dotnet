@@ -1,4 +1,4 @@
-## Use case 1: Extend functionality of an existing class
+## Use case 1: Extend functionality of an existing class, avoid boilerplate code
 * Desired behavior
 ```csharp
 var dateOfBirth = new DateTime(1995, 09, 21);
