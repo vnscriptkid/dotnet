@@ -1,4 +1,4 @@
-## 201 Created
+## 🆕 201 Created
 * Header of response must contain url to retrieve created content
 ```json
 HTTP/1.1 201 Created
