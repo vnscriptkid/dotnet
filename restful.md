@@ -28,3 +28,10 @@ public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
   // ...
   return CreatedAtRoute("GetUser", new { username = user.Username }, _mapper.Map<PhotoDto>(photo));
 ```
+
+## ✋ 204 No Content
+* Used for response of successful update
+* Code
+```csharp
+return NoContent();
+```
