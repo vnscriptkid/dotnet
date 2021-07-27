@@ -72,3 +72,8 @@ public class Photo
 }
 ```
 * ✔️ DTO comes to rescue
+
+## Optimizations
+#### :one: AsNoTracking()
+https://blog.staticvoid.co.nz/2012/entity_framework_and_asnotracking/
+- Use this tuning option on all queries for entities you don’t want to save back to the database
