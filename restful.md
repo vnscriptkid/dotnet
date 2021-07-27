@@ -35,3 +35,11 @@ public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
 ```csharp
 return NoContent();
 ```
+
+## ✔️ 200 Success
+* Used for response of successful delete
+```csharp
+user.Photos.Remove(photo);
+
+if (await _userRepository.SaveAllAsync()) return Ok();
+````
