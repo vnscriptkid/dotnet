@@ -3,11 +3,6 @@
   * System.IdentityModel.Tokens.Jwt
   * Microsoft.AspNetCore.Authentication.JwtBearer
 
-## HowTo: Retrieve `username` from jwt claims
-```csharp
-var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-```
-
 ## HowTo: Generate a token
 * Code
 ```csharp
@@ -48,15 +43,31 @@ public class TokenService : ITokenService
 ```js
 // header
 {
-  "alg": "HS512",
+  "alg": "HS512", // SecurityAlgorithms.HmacSha512
   "typ": "JWT"
 }
 // payload
 {
-  "nameid": "1",
-  "unique_name": "ashley",
+  "nameid": "1", // JwtRegisteredClaimNames.NameId
+  "unique_name": "ashley", // JwtRegisteredClaimNames.UniqueName
   "nbf": 1627644096,
-  "exp": 1628248896,
+  "exp": 1628248896, // Expires = DateTime.Now.AddDays(7),
   "iat": 1627644096
+}
+```
+
+## HowTo: Retrieve `username` and `userId` from jwt claims
+```csharp
+public static class ClaimsPrincipalExtensions
+{
+    public static string GetUsername(this ClaimsPrincipal user)
+    {
+        return user.FindFirst(ClaimTypes.Name)?.Value;
+    }
+
+    public static int GetUserId(this ClaimsPrincipal user)
+    {
+        return int.Parse(user.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+    }
 }
 ```
