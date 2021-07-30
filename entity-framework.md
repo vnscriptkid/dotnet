@@ -19,6 +19,11 @@ dotnet ef database update
 dotnet ef migrations remove
 ```
 
+* Drop database
+```console
+dotnet ef database drop
+```
+
 ## Fully defined relationships
 * Contraints on deletion: `CASCADE`
 * Not allow foreign key to be null
