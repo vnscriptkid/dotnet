@@ -9,6 +9,7 @@ var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 ```
 
 ## HowTo: Generate a token
+* Code
 ```csharp
 public class TokenService : ITokenService
 {
@@ -41,5 +42,21 @@ public class TokenService : ITokenService
 
         return tokenHandler.WriteToken(token);
     }
+}
+```
+* Actual token
+```js
+// header
+{
+  "alg": "HS512",
+  "typ": "JWT"
+}
+// payload
+{
+  "nameid": "1",
+  "unique_name": "ashley",
+  "nbf": 1627644096,
+  "exp": 1628248896,
+  "iat": 1627644096
 }
 ```
