@@ -82,3 +82,62 @@ public class Photo
 #### :one: AsNoTracking()
 https://blog.staticvoid.co.nz/2012/entity_framework_and_asnotracking/
 - Use this tuning option on all queries for entities you don’t want to save back to the database
+
+
+## ManyToMany relationship (Self-Referencing)
+#### User Stories 😴
+* User can like many other users
+* User can be liked by many other users
+
+#### Code
+* Craete new `Like` entity that represents `Likes` table
+```csharp
+public class UserLike
+{
+    public AppUser SourceUser { get; set; }
+    public int SourceUserId { get; set; }
+    public AppUser LikedUser { get; set; }
+    public int LikedUserId { get; set; }
+}
+```
+
+* Define API in `AppUser` entity to query likes
+```csharp
+public class AppUser
+{
+    // ...
+    public ICollection<UserLike> LikedByUsers { get; set; }
+    public ICollection<UserLike> LikedUsers { get; set; }
+}
+```
+
+* Build the relationship between 2 entities
+```csharp
+// This method is called by the framework when your context is first created to build the model and its mappings in memory
+public class DataContext : DbContext
+    {
+        public DataContext(DbContextOptions options) : base(options) { }
+
+        public DbSet<UserLike> Likes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<UserLike>()
+                .HasKey(k => new { k.SourceUserId, k.LikedUserId });
+
+            builder.Entity<UserLike>()
+                .HasOne(s => s.SourceUser)
+                .WithMany(l => l.LikedUsers)
+                .HasForeignKey(s => s.SourceUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<UserLike>()
+                .HasOne(s => s.LikedUser)
+                .WithMany(l => l.LikedByUsers)
+                .HasForeignKey(s => s.LikedUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+    }
+```
