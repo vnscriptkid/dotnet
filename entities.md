@@ -10,7 +10,7 @@ public int SenderId { get; set; }
 ```csharp
 public AppUser Sender { get; set; }
 ```
-* Default to null
+* `nullable: true` field
 ```csharp
 public DateTime? DateRead { get; set; }
 ```
