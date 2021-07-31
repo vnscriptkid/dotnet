@@ -14,3 +14,7 @@ public AppUser Sender { get; set; }
 ```csharp
 public DateTime? DateRead { get; set; }
 ```
+* Specify default value
+```csharp
+public DateTime MessageSent { get; set; } = DateTime.Now;
+```
