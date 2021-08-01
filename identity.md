@@ -3,7 +3,7 @@
 - Roles management
 - Policy-based authorization
 
-## Policy-based authorization
+## Policy-based, Role-based authorization
 - What
   - 1 User can have many Roles
   - 1 Role belongs to many Users
@@ -55,4 +55,29 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int,
       // ...
   }
 }
+```
+
+## Policy-based vs Role-based
+-  Role-based: by default, ready to use
+```csharp
+[Authorize(Roles = "PowerUser")]
+[Authorize(Roles = "ControlPanelUser")]
+public class ControlPanelController : Controller
+{
+}
+```
+
+- Policy-based: have to manually create
+  - Requirements: AtLeast21
+  - Custom logic
+```csharp
+services.AddAuthorization(opt =>
+{
+    opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+    opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+});
+// ...
+[Authorize(Policy = "ModeratePhotoRole")]
+[HttpGet("photos-to-moderate")]
+public ActionResult GetPhotosForModeration() { }
 ```
