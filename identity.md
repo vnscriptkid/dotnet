@@ -27,3 +27,13 @@ public class AppUserRole : IdentityUserRole<int>
     public AppRole Role { get; set; }
 }
 ```
+* Install : Microsoft.AspNetCore.Identity.EntityFrameworkCore
+* In `DataContext`, plug these in:
+```csharp
+public class DataContext : IdentityDbContext<AppUser, AppRole, int,
+    IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>,
+    IdentityRoleClaim<int>, IdentityUserToken<int>>
+{
+  // ...
+}
+```
