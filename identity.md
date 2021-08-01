@@ -34,6 +34,25 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int,
     IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>,
     IdentityRoleClaim<int>, IdentityUserToken<int>>
 {
-  // ...
+  protected override void OnModelCreating(ModelBuilder builder)
+  {
+      base.OnModelCreating(builder);
+
+      // Each User can have many entries in the UserRole join table
+      builder.Entity<AppUser>()
+          .HasMany(e => e.UserRoles)
+          .WithOne(e => e.User)
+          .HasForeignKey(ur => ur.UserId)
+          .IsRequired();
+
+      // Each Role can have many entries in the UserRole join table
+      builder.Entity<AppRole>()
+          .HasMany(e => e.UserRoles)
+          .WithOne(e => e.Role)
+          .HasForeignKey(ur => ur.RoleId)
+          .IsRequired();
+
+      // ...
+  }
 }
 ```
