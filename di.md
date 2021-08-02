@@ -20,3 +20,45 @@ public void ConfigureServices(IServiceCollection services)
     services.AddScoped<ITokenService, TokenService>();
 }   
 ```
+ ## Use case of singleton service: Online tracker
+ ```csharp
+ // Service class
+ public class PresenceTracker
+    {
+        private static readonly Dictionary<string, List<string>> OnlineUsers
+            = new Dictionary<string, List<string>>();
+
+        public Task UserConnected(string username, string connectionId)
+        {
+            lock (OnlineUsers)
+            {
+                // add user to dict
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task UserDisconnected(string username, string connectionId)
+        {
+            lock (OnlineUsers)
+            {
+                // remove user from dict
+            }
+
+            return Task.CompletedTask;
+        }
+
+        public Task<string[]> GetOnlineUsers()
+        {
+            lock (OnlineUsers)
+            {
+                // get online users
+            }
+
+            // return online users
+        }
+    }
+
+// Register that service
+services.AddSingleton<PresenceTracker>();
+ ```
