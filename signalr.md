@@ -22,24 +22,32 @@ public class PresenceHub : Hub
 ```
 
 ## Authenticate requests
+* Register service
+```csharp
+services.AddSignalR();
+```
 * Get Token from query param
 ```csharp
-options.Events = new JwtBearerEvents
-{
-    OnMessageReceived = context =>
+ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
     {
-        var accessToken = context.Request.Query["access_token"];
-
-        var path = context.HttpContext.Request.Path;
-
-        if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+        // ...
+        options.Events = new JwtBearerEvents
         {
-            context.Token = accessToken;
-        }
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"];
 
-        return Task.CompletedTask;
-    }
-};
+                var path = context.HttpContext.Request.Path;
+
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+                {
+                    context.Token = accessToken;
+                }
+
+                return Task.CompletedTask;
+            }
+        };
 ```
 
 * Allow cors with credentials
