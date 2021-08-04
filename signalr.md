@@ -101,3 +101,15 @@ public MessageHub(
 )
 { }
 ```
+
+## HowTo: Send message to all others except me
+📭 Scenario: New online user, notify all other online users about new user
+```csharp
+await Clients.Others.SendAsync("UserIsOnline", Context.User.GetUsername());
+```
+
+## HowTo: Send message to only me
+📭 Scenario: New online user, notify only that user about all online users
+```csharp
+await Clients.Caller.SendAsync("GetOnlineUsers", onlineUsers);
+```
