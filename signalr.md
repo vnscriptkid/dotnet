@@ -113,3 +113,21 @@ await Clients.Others.SendAsync("UserIsOnline", Context.User.GetUsername());
 ```csharp
 await Clients.Caller.SendAsync("GetOnlineUsers", onlineUsers);
 ```
+
+## DESIGN: Chat thread using SocketIO
+* :one: User Story 1: When user first accesses a chat thread, server sends back all messages belong to that thread
+* :two: User Story 2: When both users A & B are seeing their chat thread, A sends B a message, B instantly receives it
+* :three: User Story 3: When A sends B a message, message is marked unseen, B then navigates to chat thread, message is marked seen instantly
+* :four: User Story 4: When A sends B a message, B is online but not seeing thread, B receives a notification about new message coming, that is linked to thread
+
+## DESIGN: Online tracker using SocketIO
+- :one: User Story 1: When user A is online by first device
+    - User A receives a list of currently online users
+    - Other online users receives info of A comming online
+- :two: User Story 2: When user B is online by second device (2 connections at the same time)
+    - User A receives a list of currently online users (to his second device)
+    - Other online users receive nothing (he's still online)
+- :three: User Story 3: When user A comes offline from his single device
+    - Other online users receives info of A coming offline
+- :four: User Story 4: When user A comes offline from his second device
+    - Other online users receives nothing (A is still online with his first device)
