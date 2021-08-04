@@ -1,7 +1,20 @@
 ## Idea
-- Maintains a list of objects
+- Maintains a list of objects => avoid inconsistent reads
 - coordinates the writing out of changes
+- 1 request === 1 transaction
 - Work of writting to DB is of UnitOfWork, no longer doing something like `await _context.SaveChangesAsync();` in Repository layer
+- Pros of having only one instance of `dataContext`, injecting to different repositories:
+
+## Traditional approach
+```csharp
+// in some random controller
+repoX.getSomething()
+repoX.addSomething();
+repoY.deleteSomething();
+repoZ.UpdateSomething();
+```
+- Problems: 
+    - Each repo has it's own `_dataContext`, considered as separate transactions
 
 ## Code
 * Move repos into `UnitOfWork`
@@ -35,3 +48,5 @@ public class UnitOfWork : IUnitOfWork
     }
 }  
 ```
+
+
