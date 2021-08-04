@@ -14,6 +14,13 @@ https://martinfowler.com/bliki/LocalDTO.html
   - `Username` 👉 `Username`
   - `GetAge()` 👉 `Age`
 
+## Tricks
+- Make a field available but not send back to client
+```csharp
+[JsonIgnore]
+public bool RecipientDeleted { get; set; }
+```
+
 ## How to automapping
 #### :one: Grab the lib: AutoMapper.Extensions.Microsoft.DependencyInjection
 #### :two: Create the mapping profiles:
