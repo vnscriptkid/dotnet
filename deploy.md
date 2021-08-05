@@ -65,3 +65,21 @@ services.AddDbContext<DataContext>(options =>
 ```console
 dotnet ef migrations add PostgresInitial -o Data\Migrations
 ```
+- Deploy to Heroku
+```console
+heroku login
+heroku git:remote -a datingapp-dotnet-angular
+heroku buildpacks:set https://github.com/jincod/dotnetcore-buildpack#preview
+```
+- Add addon `heroku-postgres` 
+- Set env vars in heroku:
+```json
+{
+  "CloudinarySettings": {
+    "CloudName": "vnscriptkid",
+  }
+}
+```
+```
+CloudinarySettings:CloudName => vnscriptkid
+```
