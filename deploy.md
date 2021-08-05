@@ -85,6 +85,7 @@ CloudinarySettings:CloudName => vnscriptkid
 ```
 ```console
 heroku config:set ASPNETCORE_ENVIRONMENT=Production
+heroku config:set TokenKey=somethingsecret
 ```
 
 - Push code to heroku
