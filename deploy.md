@@ -16,3 +16,26 @@ app.UseEndpoints(endpoints =>
     endpoints.MapHub<MessageHub>("hubs/message");
 });
 ```
+
+- Add fallback endpoint to api
+```csharp
+// Controllers/FallbackController.cs
+public class FallbackController : Controller
+{
+    public ActionResult Index()
+    {
+        return PhysicalFile(
+            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "index.html"),
+            "text/HTML"
+        );
+    }
+}
+
+// Startup.cs
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+    // put this one as last route
+    endpoints.MapFallbackToController("Index", "Fallback");
+});
+```
