@@ -83,3 +83,11 @@ heroku buildpacks:set https://github.com/jincod/dotnetcore-buildpack#preview
 ```
 CloudinarySettings:CloudName => vnscriptkid
 ```
+```console
+heroku config:set ASPNETCORE_ENVIRONMENT=Production
+```
+
+- Push code to heroku
+```console
+git push heroku master
+```
