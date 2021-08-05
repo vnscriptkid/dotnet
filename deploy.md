@@ -39,3 +39,29 @@ app.UseEndpoints(endpoints =>
     endpoints.MapFallbackToController("Index", "Fallback");
 });
 ```
+
+- Switch from sqlite to postgres
+```console
+docker run --name dev -e POSTGRES_USER=appuser -e POSTGRES_PASSWORD=Pa$$w0rd -p 5432:5432 -d postgres:latest
+```
+
+- Remove all Migration files in `Data\Migrations`
+- Install `Npgsql.EntityFrameworkCore.PostgreSQL`
+
+- Register `Npgsql`
+```csharp
+services.AddDbContext<DataContext>(options =>
+{
+    options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+});
+```
+- Update connection string in `appsettings`
+```json
+"ConnectionStrings": {
+    "DefaultConnection": "Server=localhost; Port=5433; User Id=appuser; Password=Pa$$w0rd; Database=datingapp"
+  },
+```
+- Generate migrations file for postgres
+```console
+dotnet ef migrations add PostgresInitial -o Data\Migrations
+```
