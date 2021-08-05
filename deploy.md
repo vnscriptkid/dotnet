@@ -35,7 +35,7 @@ public class FallbackController : Controller
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
-    // put this one as last route
+    // put this one at last
     endpoints.MapFallbackToController("Index", "Fallback");
 });
 ```
