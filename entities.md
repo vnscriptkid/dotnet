@@ -18,3 +18,9 @@ public DateTime? DateRead { get; set; }
 ```csharp
 public DateTime MessageSent { get; set; } = DateTime.Now;
 ```
+
+## Guid vs Id
+- Guid:
+  - Can be created by client
+- Id:
+  - Created by database only
