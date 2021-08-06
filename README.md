@@ -23,7 +23,14 @@ dotnet watch run
 ```console
 dotnet dev-certs https --trust
 ```
-
+* Add new classlib project
+```console
+dotnet new classlib -n Application
+```
+* Add reference to classlib
+```console
+dotnet add reference ../Application
+```
 * Create gitignore file
 ```console
 dotnet new gitignore
