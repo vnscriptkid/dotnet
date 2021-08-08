@@ -3,6 +3,8 @@
 - Roles management
 - Policy-based authorization
 
+## Libs: `Microsoft.AspNetCore.Identity.EntityFrameworkCore`
+
 ## Policy-based, Role-based authorization
 - What
   - 1 User can have many Roles
