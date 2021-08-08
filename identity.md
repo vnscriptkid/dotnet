@@ -83,3 +83,13 @@ services.AddAuthorization(opt =>
 [HttpGet("photos-to-moderate")]
 public ActionResult GetPhotosForModeration() { }
 ```
+
+## Authenticate every requests
+```csharp
+services.AddControllers(opt =>
+{
+    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+
+    opt.Filters.Add(new AuthorizeFilter(policy));
+});
+```
