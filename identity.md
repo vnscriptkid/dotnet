@@ -93,3 +93,10 @@ services.AddControllers(opt =>
     opt.Filters.Add(new AuthorizeFilter(policy));
 });
 ```
+:star: But open routes for login, register
+```csharp
+[AllowAnonymous]
+    [ApiController]
+    [Route("api/[controller]")]
+    public class AccountController : ControllerBase
+```
