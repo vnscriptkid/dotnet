@@ -31,3 +31,6 @@ https://auth0.com/docs/tokens/signing-algorithms
 - Either of 2
   - RS256 (RSA Signature with SHA-256): asymmetric 
   - HS256 (HMAC with SHA-256): symmetric 
+
+## Verify
+<img height="200" src="https://user-images.githubusercontent.com/28957748/128695951-ff972282-3e37-4cf6-a594-42d755c2cf16.png" />
