@@ -35,6 +35,10 @@ dotnet add reference ../Application
 ```console
 dotnet new gitignore
 ```
+* I'm done with adding refs
+```console
+dotnet restore
+```
 
 ## Important files
 * Program.cs is where the application starts.
