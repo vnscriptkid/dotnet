@@ -19,3 +19,15 @@
 - Jwt
   - Token that holds user's data itself => value token
   - Store in localStorage
+
+## Jwt structure
+- 3 parts
+  - Header: Meta info, algorithms
+  - Payload: User info like userId, email
+  - Signature: Verify if `Header` && `Payload` is correctly provided
+
+## Signing
+https://auth0.com/docs/tokens/signing-algorithms
+- Either of 2
+  - RS256 (RSA Signature with SHA-256): asymmetric 
+  - HS256 (HMAC with SHA-256): symmetric 
