@@ -15,5 +15,7 @@
 ## Jwt vs Session
 - Session-based
   - Token that has reference to user's data => reference token
+  - Store in cookie
 - Jwt
   - Token that holds user's data itself => value token
+  - Store in localStorage
