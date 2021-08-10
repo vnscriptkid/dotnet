@@ -186,13 +186,13 @@ public class ActivityAttendee
 public class AppUser : IdentityUser
 {
     // ...
-    public ICollection<ActivityAttendee> Activities { get; set; }
+    public ICollection<ActivityAttendee> Activities { get; set; } = new List<ActivityAttendee>();
 }
 
 public class Activity
 {
     // ...
-    public ICollection<ActivityAttendee> Attendees { get; set; }
+    public ICollection<ActivityAttendee> Attendees { get; set; } = new List<ActivityAttendee>();
 }
 ```
 #### Configure relationship between tables
