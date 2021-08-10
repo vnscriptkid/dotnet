@@ -25,6 +25,7 @@ return await _context.Activities.FindAsync(request.Id);
 #### Use `queryable extensions`
 ```csharp
 return await _context.Activities
-                        .ProjectTo<ActivityDto>(_mapper.ConfigurationProvider) // while querying, only only fields listed in `ActivityDto`
+                        // while querying, select only fields listed in `ActivityDto`
+                        .ProjectTo<ActivityDto>(_mapper.ConfigurationProvider) 
                         .FirstOrDefaultAsync(a => a.Id == request.Id);
 ```                    
