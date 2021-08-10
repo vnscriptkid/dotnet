@@ -31,9 +31,19 @@ protected override Task HandleRequirementAsync(AuthorizationHandlerContext conte
 ```
 * Register the requirement
 ```csharp
+services.AddAuthorization(opt =>
+{
+    opt.AddPolicy("IsActivityHost", policy =>
+    {
+        policy.Requirements.Add(new IsHostRequirement());
+    });
+});
 
+services.AddTransient<IAuthorizationHandler, IsHostRequirementHandler>();
 ```
 * Authorize endpoint
 ```csharp
-
+[Authorize(Policy = "IsActivityHost")]
+[HttpPut("{id}")]
+public async Task<ActionResult> UpdateActivity(Guid id, Activity activity)
 ```
