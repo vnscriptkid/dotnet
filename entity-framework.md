@@ -141,3 +141,33 @@ public class DataContext : DbContext
         }
     }
 ```
+
+## ManyToMany (by convention)
+- User stories
+    - 1 User joins many Activities
+    - 1 Activity has many Users
+```csharp
+public class AppUser : IdentityUser
+{
+    // ...
+    public ICollection<Activity> Activities { get; set; }
+}
+
+public class Activity
+{
+    // ...
+    public ICollection<AppUser> Attendees { get; set; }
+}
+```
+- Entity framwork creates a join table behind the scene:
+```csharp
+migrationBuilder.CreateTable(
+    name: "ActivityAppUser",
+    columns: table => new
+    {
+        ActivitiesId = table.Column<Guid>(type: "TEXT", nullable: false),
+        AttendeesId = table.Column<string>(type: "TEXT", nullable: false)
+    },
+    // ...
+```
+```
