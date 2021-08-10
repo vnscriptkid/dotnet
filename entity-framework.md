@@ -170,3 +170,57 @@ migrationBuilder.CreateTable(
     },
     // ...
 ```
+
+## ManyToMany (manually configure)
+#### Define models (represents physical table)
+```csharp
+public class ActivityAttendee
+{
+    public string AppUserId { get; set; }
+    public AppUser AppUser { get; set; }
+    public Guid ActivityId { get; set; }
+    public Activity Activity { get; set; }
+    public bool isHost { get; set; }
+}
+
+public class AppUser : IdentityUser
+{
+    // ...
+    public ICollection<ActivityAttendee> Activities { get; set; }
+}
+
+public class Activity
+{
+    // ...
+    public ICollection<ActivityAttendee> Attendees { get; set; }
+}
+```
+#### Configure relationship between tables
+```csharp
+    public class DataContext : IdentityDbContext<AppUser>
+    {
+        // ...
+        public DbSet<ActivityAttendee> ActivityAttendees { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            // Determine primary key of join table
+            builder.Entity<ActivityAttendee>()
+                .HasKey(aa => new { aa.AppUserId, aa.ActivityId });
+
+            // Determine relationship between `AppUsers` table and join table
+            builder.Entity<ActivityAttendee>()
+                .HasOne(aa => aa.AppUser)
+                .WithMany(u => u.Activities)
+                .HasForeignKey(aa => aa.AppUserId);
+
+            // Determine relationship between `Activities` table and join table
+            builder.Entity<ActivityAttendee>()
+                .HasOne(aa => aa.Activity)
+                .WithMany(a => a.Attendees)
+                .HasForeignKey(aa => aa.ActivityId);
+        }
+    }
+```
