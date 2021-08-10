@@ -6,6 +6,10 @@ https://stackoverflow.com/questions/38138100/addtransient-addscoped-and-addsingl
 * Scoped: lifetime of object is lifetime of each request (used most of the time)
 * Transient: object is created when it's requested
 
+## When to use each
+- If you're having memory problems and have configured __Transient__ registrations for your IoC container, try using __Scoped__ registrations instead.
+- make sure __objects__ constructed by your container are being __disposed properly__
+
 ## How it effects objects created
 - DI approaches decide when object is created, how long is it's lifetime, when it is destroyed
 
