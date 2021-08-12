@@ -224,3 +224,29 @@ public class Activity
         }
     }
 ```
+
+## OneToMany 
+- Use case:
+    - One user can have many comments on an activity
+    - One activity can have many comments
+
+- Modeling
+```csharp
+public class Comment
+{
+    public AppUser Author { get; set; }
+    public Activity Activity { get; set; }
+}
+
+public class Activity
+{
+    public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+}
+```
+- If activity get deleted, all comments get deleted
+```csharp
+builder.Entity<Comment>()
+                .HasOne(c => c.Activity)
+                .WithMany(c => c.Comments)
+                .OnDelete(DeleteBehavior.Cascade);
+```                
