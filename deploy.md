@@ -5,8 +5,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // added code
-app.UseDefaultFiles();
-app.UseStaticFiles();
+app.UseDefaultFiles(); // Look for `index.html` in wwwroot/
+app.UseStaticFiles(); // Serve static files in wwwroot/
 // end
 
 app.UseEndpoints(endpoints =>
