@@ -8,7 +8,8 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     app.UseReferrerPolicy(opt => opt.NoReferrer());
     app.UseXXssProtection(opt => opt.EnabledWithBlockMode());
     app.UseXfo(opt => opt.Deny());
-    app.UseCspReportOnly(opt => opt
+    // UseCspReportOnly to see report
+    app.UseCsp(opt => opt
         .BlockAllMixedContent()
         .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com"))
         .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
@@ -19,4 +20,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     );
     // ...
 }    
-            
+```
+
+## Rate your site's security
+* https://securityheaders.com/
