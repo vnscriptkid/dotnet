@@ -19,6 +19,19 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         .ScriptSources(s => s.Self().CustomSources("sha256-zUFjt0EEs9COUnBrzMHnTS0AKG6iNDJbI1udluNR+3s="))
     );
     // ...
+    
+    if (env.IsDevelopment())
+    {
+        // ...
+    }
+    else // prod 
+    { 
+        app.Use(async (context, next) =>
+        {
+            context.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
+            await next.Invoke();
+        });
+    }
 }    
 ```
 
