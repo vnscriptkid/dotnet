@@ -56,6 +56,23 @@ public class TokenService : ITokenService
 }
 ```
 
+## HowTo: Validate a token
+```csharp
+services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+   .AddJwtBearer(opt =>
+   {
+       opt.TokenValidationParameters = new TokenValidationParameters
+       {
+           ValidateIssuerSigningKey = true,
+           IssuerSigningKey = key,
+           ValidateIssuer = false,
+           ValidateAudience = false,
+           ValidateLifetime = true,
+           ClockSkew = TimeSpan.Zero
+       };
+   });
+```
+
 ## HowTo: Retrieve `username` and `userId` from jwt claims
 ```csharp
 public static class ClaimsPrincipalExtensions
