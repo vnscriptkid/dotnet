@@ -36,6 +36,7 @@ https://auth0.com/docs/tokens/signing-algorithms
 <img height="200" src="https://user-images.githubusercontent.com/28957748/128695951-ff972282-3e37-4cf6-a594-42d755c2cf16.png" />
 
 ## Best Practice
+https://blog.ropnop.com/storing-tokens-in-browser/
 - No secret user's info in Payload
 - Keep token yourself
 - Disable token: blacklist
