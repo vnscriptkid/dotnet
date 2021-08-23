@@ -16,5 +16,22 @@ Persistence // DbContext (EntityFramework)
 
 ## CQRS Pattern
 
-## Error Handling
+## Error Handling (in `Application` layer)
 * Package: `FluentValidation.AspNetCore`
+#### Add `CommandValidator` to validate `Activity` coming from `Command`
+```csharp
+public class Command : IRequest
+{
+    public Activity Activity { get; set; }
+}
+
+public class CommandValidator : AbstractValidator<Activity>
+{
+    public CommandValidator()
+    {
+        RuleFor(x => x.Title).NotEmpty();
+    }
+}
+
+public class Handler : IRequestHandler<Command> {}
+```
