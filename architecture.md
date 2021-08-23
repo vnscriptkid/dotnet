@@ -18,8 +18,9 @@ Persistence // DbContext (EntityFramework)
 
 ## Error Handling (in `Application` layer)
 * Package: `FluentValidation.AspNetCore`
-#### Add `CommandValidator` to validate `Activity` coming from `Command`
+#### :one: Add `CommandValidator` to validate `Activity` coming from `Command`
 ```csharp
+// Application/Activities/Create.cs
 public class Command : IRequest
 {
     public Activity Activity { get; set; }
@@ -34,4 +35,13 @@ public class CommandValidator : AbstractValidator<Activity>
 }
 
 public class Handler : IRequestHandler<Command> {}
+```
+
+#### :two: Register validations
+```csharp
+services.AddControllers()
+.AddFluentValidation(config =>
+{
+    config.RegisterValidatorsFromAssemblyContaining<Create>();
+});
 ```
