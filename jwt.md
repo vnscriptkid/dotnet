@@ -39,5 +39,11 @@ https://auth0.com/docs/tokens/signing-algorithms
 - No secret user's info in Payload
 - Keep token yourself
 - Disable token: blacklist
-- jwt token should be short-lived
-- refresh-token is long-lived, avoid re-login when jwt expires
+- jwt token 
+  - should be short-lived, 
+  - stored in localStorage
+- refresh-token 
+  - is long-lived
+  - avoid re-login when jwt expires
+  - stored in cookie (js can't manipulate, sent with every reqs)
+  - hackers can use refreshToken to exchange for token? Refresh token rotation: every time an application exchanges a refresh token to get a new access token, a new refresh token is also returned
