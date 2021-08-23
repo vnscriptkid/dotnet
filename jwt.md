@@ -40,4 +40,4 @@ https://auth0.com/docs/tokens/signing-algorithms
 - Keep token yourself
 - Disable token: blacklist
 - jwt token should be short-lived
-- refresh-token is long-lived
+- refresh-token is long-lived, avoid re-login when jwt expires
