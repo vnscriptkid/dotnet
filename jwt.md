@@ -41,9 +41,9 @@ https://auth0.com/docs/tokens/signing-algorithms
 - Disable token: blacklist
 - jwt token 
   - should be short-lived, 
-  - stored in localStorage
+  - stored in localStorage (accross domains, persist between tabs, after closing browsers)
 - refresh-token 
   - is long-lived
   - avoid re-login when jwt expires
-  - stored in cookie (js can't manipulate, sent with every reqs)
+  - stored in cookie (js can't manipulate, sent with every reqs, not accross domains, persist)
   - hackers can use refreshToken to exchange for token? Refresh token rotation: every time an application exchanges a refresh token to get a new access token, a new refresh token is also returned
