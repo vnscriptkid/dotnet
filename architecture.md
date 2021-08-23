@@ -15,3 +15,6 @@ Persistence // DbContext (EntityFramework)
 <img height="300px" src="https://user-images.githubusercontent.com/28957748/130484692-356d71ac-6068-4296-a30e-c87fc364d439.png"/>
 
 ## CQRS Pattern
+
+## Error Handling
+* Package: `FluentValidation.AspNetCore`
