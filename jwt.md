@@ -39,3 +39,5 @@ https://auth0.com/docs/tokens/signing-algorithms
 - No secret user's info in Payload
 - Keep token yourself
 - Disable token: blacklist
+- jwt token should be short-lived
+- refresh-token is long-lived
