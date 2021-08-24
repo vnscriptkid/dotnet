@@ -66,3 +66,6 @@ public void ConfigureServices(IServiceCollection services)
 // Register that service
 services.AddSingleton<PresenceTracker>();
  ```
+
+## Interview
+https://www.youtube.com/watch?v=yVKTvtevM0w
