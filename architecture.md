@@ -16,7 +16,7 @@ Persistence // DbContext (EntityFramework)
 
 ## CQRS Pattern
 
-## Error Handling (in `Application` layer)
+## Validation Errors Handling (in `Application` layer)
 * Package: `FluentValidation.AspNetCore`
 #### :one: Add `CommandValidator` to validate `Activity` coming from `Command`
 ```csharp
@@ -44,4 +44,53 @@ services.AddControllers()
 {
     config.RegisterValidatorsFromAssemblyContaining<Create>();
 });
+```
+
+## Handle errors that we're aware of (In `Application` layer)
+- Problem: `API` layer should know nothing about `Application` layer (see dependancy photo)
+- Solution: 
+    - Handle errors in `Application` layer
+    - Abstract out result (success of failure) into `Result` object
+    - API gets `Result` object back from `Application`, it now looks at a contract with `Application` instead of internal details. 
+```csharp
+public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
+{
+    var activity = await _context.Activities.FindAsync(request.Id);
+
+    if (activity == null) return null;
+
+    _context.Remove(activity);
+
+    var success = await _context.SaveChangesAsync() > 0;
+
+    if (success) return Result<Unit>.Success(Unit.Value);
+
+    return Result<Unit>.Failure("Failed to delete activity");
+}
+```
+
+```csharp
+// Application/Core/Result.cs
+public class Result<T>
+{
+    public bool IsSuccess { get; set; }
+    public T Value { get; set; }
+    public string Error { get; set; }
+    public static Result<T> Success(T value) => new Result<T> { IsSuccess = true, Value = value };
+    public static Result<T> Failure(string error) => new Result<T> { IsSuccess = false, Error = error };
+}
+```
+
+```csharp
+// API/Controller/BaseApiController.cs
+protected ActionResult HandleResult<T>(Result<T> result)
+{
+    if (result == null) return NotFound();
+    if (result.IsSuccess && result.Value != null)
+        return Ok(result.Value);
+    if (result.IsSuccess && result.Value == null)
+        return NotFound();
+
+    return BadRequest(result.Error);
+}
 ```
